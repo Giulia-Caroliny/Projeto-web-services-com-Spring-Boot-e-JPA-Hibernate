@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.Giulia.webServices.entidades.enums.StatusPedido;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,15 +16,17 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pedidos")
-public class Pedido implements Serializable{
+public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant data;
-	
+
+	private Integer status;
+
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Usuario cliente;
@@ -31,10 +35,11 @@ public class Pedido implements Serializable{
 		super();
 	}
 
-	public Pedido(Long id, Instant data, Usuario cliente) {
+	public Pedido(Long id, Instant data, StatusPedido status, Usuario cliente) {
 		super();
 		this.id = id;
 		this.data = data;
+		setStatus(status);
 		this.cliente = cliente;
 	}
 
@@ -52,6 +57,16 @@ public class Pedido implements Serializable{
 
 	public void setData(Instant data) {
 		this.data = data;
+	}
+
+	public StatusPedido getStatus() {
+		return StatusPedido.valueOf(status);
+	}
+
+	public void setStatus(StatusPedido status) {
+		if (status != null) {
+			this.status = status.getCode();
+		}
 	}
 
 	public Usuario getCliente() {
@@ -78,7 +93,5 @@ public class Pedido implements Serializable{
 		Pedido other = (Pedido) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }
