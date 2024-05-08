@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.Giulia.webServices.entidades.Categoria;
 import com.Giulia.webServices.entidades.Pedido;
+import com.Giulia.webServices.entidades.Produto;
 import com.Giulia.webServices.entidades.Usuario;
 import com.Giulia.webServices.entidades.enums.StatusPedido;
 import com.Giulia.webServices.repositorios.CategoriaRepositorio;
 import com.Giulia.webServices.repositorios.PedidoRepositorio;
+import com.Giulia.webServices.repositorios.ProdutoRepositorio;
 import com.Giulia.webServices.repositorios.UsuarioRepositorio;
 
 @Configuration
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private CategoriaRepositorio categoriaRepositorio;
+	
+	@Autowired
+	private ProdutoRepositorio produtoRepositorio;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -42,10 +47,17 @@ public class TestConfig implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Electronics");
 		Categoria cat2 = new Categoria(null, "Books");
 		Categoria cat3 = new Categoria(null, "Computers");
+		
+		Produto p1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Produto p2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Produto p3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Produto p4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Produto p5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
 		usuarioRepositorio.saveAll(Arrays.asList(u1, u2));
 		pedidoRepositorio.saveAll(Arrays.asList(o1, o2, o3));
 		categoriaRepositorio.saveAll(Arrays.asList(cat1, cat2, cat3));
+		produtoRepositorio.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 
 }

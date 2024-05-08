@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria implements Serializable {
+@Table(name = "produtos")
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,18 +23,24 @@ public class Categoria implements Serializable {
 	private Long id;
 
 	private String nome;
+	private String descricao;
+	private Double preco;
+	private String imgUrl;
 	
 	@Transient
-	private Set<Produto> prod = new HashSet<Produto>();
+	private Set<Categoria> cat = new HashSet<Categoria>();
 
-	public Categoria() {
+	public Produto() {
 		super();
 	}
 
-	public Categoria(Long id, String nome) {
+	public Produto(Long id, String nome, String descricao, Double preco, String imgUrl) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.imgUrl = imgUrl;
 	}
 
 	public Long getId() {
@@ -53,8 +59,32 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
-	public Set<Produto> getProd() {
-		return prod;
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public Set<Categoria> getCat() {
+		return cat;
 	}
 
 	@Override
@@ -70,7 +100,7 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
 	}
 

@@ -1,0 +1,33 @@
+package com.Giulia.webServices.recursos;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.Giulia.webServices.entidades.Produto;
+import com.Giulia.webServices.servicos.ProdutoServicos;
+
+@RestController
+@RequestMapping(value = "/produtos")
+public class ProdutoRecursos {
+
+	@Autowired
+	private ProdutoServicos servicos;
+
+	@GetMapping
+	public ResponseEntity<List<Produto>> findAll() {
+		List<Produto> lista = servicos.findAll();
+		return ResponseEntity.ok().body(lista);
+	}
+
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Produto> findById(@PathVariable Long id) {
+		Produto prod = servicos.findById(id);
+		return ResponseEntity.ok().body(prod);
+	}
+}
