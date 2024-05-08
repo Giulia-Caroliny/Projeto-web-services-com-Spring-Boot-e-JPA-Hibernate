@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
 	private String email;
 	private String telefone;
 	private String senha;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<Pedido>();

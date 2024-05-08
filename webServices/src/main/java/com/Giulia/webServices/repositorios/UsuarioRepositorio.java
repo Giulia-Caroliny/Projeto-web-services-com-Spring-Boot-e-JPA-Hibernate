@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.Giulia.webServices.entidades.Usuario;
 
 @Repository
-public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
 }

@@ -3,9 +3,9 @@ package com.Giulia.webServices.repositorios;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.Giulia.webServices.entidades.Pedido;
+import com.Giulia.webServices.entidades.Categoria;
 
 @Repository
-public interface PedidoRepositorio extends JpaRepository<Pedido, Long> {
+public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
 
 }

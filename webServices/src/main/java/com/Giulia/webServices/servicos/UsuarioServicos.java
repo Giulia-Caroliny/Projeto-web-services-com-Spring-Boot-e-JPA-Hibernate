@@ -14,15 +14,14 @@ public class UsuarioServicos {
 
 	@Autowired
 	private UsuarioRepositorio repositorio;
-	
-	public List<Usuario> findAll(){
+
+	public List<Usuario> findAll() {
 		return repositorio.findAll();
 	}
-	
 
 	public Usuario findById(Long id) {
 		Optional<Usuario> user = repositorio.findById(id);
 		return user.get();
 	}
-	
+
 }
