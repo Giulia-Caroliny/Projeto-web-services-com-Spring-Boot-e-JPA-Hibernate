@@ -5,12 +5,17 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "produtos")
@@ -26,9 +31,14 @@ public class Produto implements Serializable {
 	private String descricao;
 	private Double preco;
 	private String imgUrl;
-	
-	@Transient
+
+	@ManyToMany
+	@JoinTable(name = "Produto_Categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private Set<Categoria> cat = new HashSet<Categoria>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.produto")
+	public Set<ItemPedido> itens = new HashSet<ItemPedido>();
 
 	public Produto() {
 		super();
@@ -85,6 +95,14 @@ public class Produto implements Serializable {
 
 	public Set<Categoria> getCat() {
 		return cat;
+	}
+	
+	public Set<Pedido> getPedidos() {
+		Set<Pedido> aux = new HashSet<>();
+		for(ItemPedido x : itens) {
+			aux.add(x.getPedido());
+		}
+		return aux;
 	}
 
 	@Override

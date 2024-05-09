@@ -32,10 +32,10 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private CategoriaRepositorio categoriaRepositorio;
-	
+
 	@Autowired
 	private ProdutoRepositorio produtoRepositorio;
-	
+
 	@Autowired
 	private ItemPedidoRepositorio itemPedidoRepositorio;
 
@@ -52,13 +52,13 @@ public class TestConfig implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Electronics");
 		Categoria cat2 = new Categoria(null, "Books");
 		Categoria cat3 = new Categoria(null, "Computers");
-		
+
 		Produto p1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
 		Produto p2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
 		Produto p3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
 		Produto p4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Produto p5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
-		
+
 		ItemPedido oi1 = new ItemPedido(o1, p1, 2, p1.getPreco());
 		ItemPedido oi2 = new ItemPedido(o1, p3, 1, p3.getPreco());
 		ItemPedido oi3 = new ItemPedido(o2, p3, 2, p3.getPreco());
@@ -69,6 +69,16 @@ public class TestConfig implements CommandLineRunner {
 		categoriaRepositorio.saveAll(Arrays.asList(cat1, cat2, cat3));
 		produtoRepositorio.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		itemPedidoRepositorio.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+		p1.getCat().add(cat2);
+		p2.getCat().add(cat1);
+		p2.getCat().add(cat3);
+		p2.getCat().add(cat2);
+		p3.getCat().add(cat3);
+		p4.getCat().add(cat3);
+		p5.getCat().add(cat2);
+
+		produtoRepositorio.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 
 }
