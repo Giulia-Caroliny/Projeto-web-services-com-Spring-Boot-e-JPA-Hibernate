@@ -61,6 +61,10 @@ public class ItemPedido {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+	
+	public Double getSubTotal() {
+		return quantidade * preco;
+	}
 
 	@Override
 	public int hashCode() {
