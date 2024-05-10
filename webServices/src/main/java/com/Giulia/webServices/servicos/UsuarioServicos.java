@@ -23,5 +23,24 @@ public class UsuarioServicos {
 		Optional<Usuario> user = repositorio.findById(id);
 		return user.get();
 	}
+	
+	public Usuario inserir(Usuario usuario) {
+		return repositorio.save(usuario);
+	}
+	
+	public void deletar(Long id) {
+		repositorio.deleteById(id);
+	}
 
+	public Usuario atualizar(Long id, Usuario usuario) {
+		Usuario aux = repositorio.getReferenceById(id);
+		atualizar(aux, usuario);
+		return repositorio.save(aux);
+	}
+
+	private void atualizar(Usuario aux, Usuario usuario) {
+		aux.setNome(usuario.getNome());
+		aux.setEmail(usuario.getEmail());
+		aux.setTelefone(usuario.getTelefone());
+	}
 }
